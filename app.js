@@ -53,4 +53,7 @@ var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, funct
     });
 }); };
 var boton = document.getElementById("next");
-boton === null || boton === void 0 ? void 0 : boton.addEventListener('click', function () { requestApiJoke(); });
+boton === null || boton === void 0 ? void 0 : boton.addEventListener('click', function () {
+    requestApiJoke();
+    boton.textContent = "Next joke!";
+});

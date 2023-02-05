@@ -10,7 +10,8 @@ const requestApiJoke:any = async ()=>{
 }
 
 let boton:any = document.getElementById("next");
-boton?.addEventListener('click',()=> {requestApiJoke()});
+boton?.addEventListener('click',()=> {requestApiJoke();
+                                      boton.textContent="Next joke!"});
 
 
 
