@@ -35,8 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
+var reportAcudits = [];
 var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, function () {
-    var respuesta, data, caja;
+    var respuesta, data, caja, d, text;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, fetch('https://icanhazdadjoke.com/slack')];
@@ -48,6 +49,11 @@ var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, funct
                 console.log(data.attachments[0].text);
                 caja = document.getElementById("jokeBox");
                 caja.textContent = data.attachments[0].text;
+                reportAcudits[reportAcudits.length] = { joke: data.attachments[0].text, result: "", date: "" };
+                d = new Date();
+                text = d.toISOString();
+                reportAcudits[reportAcudits.length - 1].date = text;
+                console.log(reportAcudits);
                 return [2 /*return*/];
         }
     });
@@ -55,5 +61,31 @@ var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, funct
 var boton = document.getElementById("next");
 boton === null || boton === void 0 ? void 0 : boton.addEventListener('click', function () {
     requestApiJoke();
+    addBotons();
+    rating();
     boton.textContent = "Next joke!";
+    rank = 0;
 });
+var opinion = document.getElementById("opinion");
+var addBotons = function () {
+    opinion.innerHTML = "";
+    opinion.insertAdjacentHTML('beforeend', "\n  <button id=\"positive\">\uD83D\uDE01</button>\n  <button id=\"neutral\">\uD83D\uDE10</button>\n  <button id=\"negative\">\uD83D\uDE2A</button>");
+};
+var rank;
+var rating = function () {
+    var botonPositive = document.getElementById("positive");
+    botonPositive === null || botonPositive === void 0 ? void 0 : botonPositive.addEventListener('click', function () {
+        rank = 3;
+        reportAcudits[reportAcudits.length - 1].result = rank;
+    });
+    var botonNeutral = document.getElementById("neutral");
+    botonNeutral === null || botonNeutral === void 0 ? void 0 : botonNeutral.addEventListener('click', function () {
+        rank = 2;
+        reportAcudits[reportAcudits.length - 1].result = rank;
+    });
+    var botonNegative = document.getElementById("negative");
+    botonNegative === null || botonNegative === void 0 ? void 0 : botonNegative.addEventListener('click', function () {
+        rank = 1;
+        reportAcudits[reportAcudits.length - 1].result = rank;
+    });
+};

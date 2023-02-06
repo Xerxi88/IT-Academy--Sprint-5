@@ -53,3 +53,17 @@ body{
     color: #62d5b4;
     transition: 0.3s;
 }
+#opinion{
+    text-align: center;
+    font-size: 5;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    
+}
+div #positive,
+    #neutral, 
+    #negative{
+    font-size: 3em;
+    border: hidden;
+    background: none;
+}
