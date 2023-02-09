@@ -11,6 +11,10 @@ const getAPITemperature:any =async()=>{
 }
 getAPITemperature();
 
+const randomJoke= () => {
+  Math.random() > 0.5 ? requestApiJoke() : requestApiJokeChuck();
+}
+
 
 const requestApiJoke:any = async ()=>{
 
@@ -25,13 +29,30 @@ const requestApiJoke:any = async ()=>{
     reportAcudits[reportAcudits.length] = { joke: data.attachments[0].text , result: "", date: "" };
     const d = new Date();
     let text = d.toISOString();
-    reportAcudits[reportAcudits.length - 1].date = text;
+    reportAcudits[reportAcudits.length-1].date = text;
     console.log(reportAcudits);
+}
+
+const requestApiJokeChuck:any = async ()=>{
+
+  const respuesta = await fetch('https://api.chucknorris.io/jokes/random');
+  const data = await respuesta.json();
+
+  console.log(data.value);
+
+  let caja: any = document.getElementById("jokeBox");
+  caja.textContent = data.value;
+
+  reportAcudits[reportAcudits.length] = { joke: data.value , result: "", date: "" };
+  const d = new Date();
+  let text = d.toISOString();
+  reportAcudits[reportAcudits.length-1].date = text;
+  console.log(reportAcudits);
 }
 
 let boton:any = document.getElementById("next");
 
-boton?.addEventListener('click',()=> {requestApiJoke();
+boton?.addEventListener('click',()=> {randomJoke();
                                       addBotons();
                                       rating();
                                       boton.textContent="Next joke!";

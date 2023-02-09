@@ -55,6 +55,9 @@ var getAPITemperature = function () { return __awaiter(_this, void 0, void 0, fu
     });
 }); };
 getAPITemperature();
+var randomJoke = function () {
+    Math.random() > 0.5 ? requestApiJoke() : requestApiJokeChuck();
+};
 var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, function () {
     var respuesta, data, caja, d, text;
     return __generator(this, function (_a) {
@@ -77,9 +80,31 @@ var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, funct
         }
     });
 }); };
+var requestApiJokeChuck = function () { return __awaiter(_this, void 0, void 0, function () {
+    var respuesta, data, caja, d, text;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, fetch('https://api.chucknorris.io/jokes/random')];
+            case 1:
+                respuesta = _a.sent();
+                return [4 /*yield*/, respuesta.json()];
+            case 2:
+                data = _a.sent();
+                console.log(data.value);
+                caja = document.getElementById("jokeBox");
+                caja.textContent = data.value;
+                reportAcudits[reportAcudits.length] = { joke: data.value, result: "", date: "" };
+                d = new Date();
+                text = d.toISOString();
+                reportAcudits[reportAcudits.length - 1].date = text;
+                console.log(reportAcudits);
+                return [2 /*return*/];
+        }
+    });
+}); };
 var boton = document.getElementById("next");
 boton === null || boton === void 0 ? void 0 : boton.addEventListener('click', function () {
-    requestApiJoke();
+    randomJoke();
     addBotons();
     rating();
     boton.textContent = "Next joke!";
