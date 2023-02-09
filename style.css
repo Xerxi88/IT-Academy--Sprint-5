@@ -12,7 +12,9 @@ body{
     justify-items: center;
     align-items: center;
 }
-#temperature{
+
+#tempcontainer{
+    display: flex;
     position: absolute;
     top:0px;
     left: 0px;
@@ -20,26 +22,31 @@ body{
     font-size: 1.2em;
     font-weight: bold;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-.container{
-    width: 50%;
-    background-color:rgb(226, 254, 245);
+    background-color: #62d5b4;
     border-radius: 15px;
-    border: 2px solid rgb(104, 249, 200);
-    box-shadow: 0px 0px 10px;
+}
+#numTemperature{
+    margin-left: 10px;
+    padding-right: 10px;
+}
+
+.container{
+    width: 40%;
     justify-items: center;
+    padding: 120px 100px;
 }
 
 #title{
     padding: 30px;
     text-align: center;
-    color: rgba(29, 29, 29, 0.8);
+    color:gray
 }
 #jokeBox{
     padding: 30px 40px;
     text-align: center;
     font-weight: bold;
     font-size: 1.1em;
+    color: white;
 }
 #next{
     margin: 30px;
@@ -63,13 +70,20 @@ body{
     text-align: center;
     font-size: 5;
     margin-left: 50%;
-    transform: translateX(-50%);
-    
+    transform: translateX(-50%);  
+    box-sizing: border-box; 
+    width: 300px;
+    height: 100px;
 }
-div #positive,
-    #neutral, 
-    #negative{
+.faces{
     font-size: 3em;
     border: hidden;
     background: none;
+    box-sizing: border-box; 
+    transition: 0.5s;
+    width: 80px;
+    height: 90px;
+}
+.faces:hover{
+    font-size: 3.5em;
 }

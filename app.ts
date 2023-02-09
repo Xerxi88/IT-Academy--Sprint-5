@@ -3,16 +3,36 @@ let reportAcudits: any[] = [];
 const getAPITemperature:any =async()=>{
   const respuesta = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Barcelona&APPID=36186b9d10d0073dd0551fb3d0367789');
   const temperatura = await respuesta.json();
-    console.log(temperatura);
-    console.log(temperatura.weather[0].main);
 
     let temp: any = document.getElementById("temperature");
-    temp.textContent=temperatura.weather[0].main;
+    let numTemp: any = document.getElementById("numTemperature");
+    let icono:any = temperatura.weather[0].icon;
+    let num:any = (temperatura.main.temp)-273.15;// Conversión de grados Kelvin a Celsius
+    temp.src = `https://openweathermap.org/img/wn/${icono}@2x.png`;
+    numTemp.textContent = num.toFixed(1)+'ºC';
+
 }
 getAPITemperature();
 
 const randomJoke= () => {
+  randomBackground();
   Math.random() > 0.5 ? requestApiJoke() : requestApiJokeChuck();
+}
+
+const randomBackground = () =>{
+  
+  const arrayBackgrounds = ["url('/img/cian.svg')","url('/img/yellow.svg')","url('/img/blue.svg')","url('/img/red.svg')","url('/img/purple.svg')",]
+
+  let change: any = document.querySelector(".container");
+  let title: any = document.querySelector("#title");
+  let randomNumber: number = Math.floor(Math.random()*5);
+  change.style.backgroundImage = arrayBackgrounds[randomNumber];
+  change.style.backgroundRepeat = "no-repeat";
+  change.style.backgroundSize = "cover";
+  change.style.backgroundPositionX = "center";
+  change.style.backgroundPositionY = "center";
+  change.style.backgroundOrigin = "border-box";
+  title.style.color="white";
 }
 
 
@@ -63,9 +83,9 @@ let opinion:any = document.getElementById("opinion");
 const addBotons:any = ()=>{ 
   opinion.innerHTML="";
   opinion.insertAdjacentHTML('beforeend',`
-  <button id="positive">😁</button>
-  <button id="neutral">😐</button>
-  <button id="negative">😪</button>`);
+  <button class="faces">😁</button>
+  <button class="faces">😐</button>
+  <button class="faces">😪</button>`);
 }
 
 let rank:number;

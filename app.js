@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var reportAcudits = [];
 var getAPITemperature = function () { return __awaiter(_this, void 0, void 0, function () {
-    var respuesta, temperatura, temp;
+    var respuesta, temperatura, temp, numTemp, icono, num;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, fetch('https://api.openweathermap.org/data/2.5/weather?q=Barcelona&APPID=36186b9d10d0073dd0551fb3d0367789')];
@@ -46,17 +46,33 @@ var getAPITemperature = function () { return __awaiter(_this, void 0, void 0, fu
                 return [4 /*yield*/, respuesta.json()];
             case 2:
                 temperatura = _a.sent();
-                console.log(temperatura);
-                console.log(temperatura.weather[0].main);
                 temp = document.getElementById("temperature");
-                temp.textContent = temperatura.weather[0].main;
+                numTemp = document.getElementById("numTemperature");
+                icono = temperatura.weather[0].icon;
+                num = (temperatura.main.temp) - 273.15;
+                temp.src = "https://openweathermap.org/img/wn/".concat(icono, "@2x.png");
+                numTemp.textContent = num.toFixed(1) + 'ºC';
                 return [2 /*return*/];
         }
     });
 }); };
 getAPITemperature();
 var randomJoke = function () {
+    randomBackground();
     Math.random() > 0.5 ? requestApiJoke() : requestApiJokeChuck();
+};
+var randomBackground = function () {
+    var arrayBackgrounds = ["url('/img/cian.svg')", "url('/img/yellow.svg')", "url('/img/blue.svg')", "url('/img/red.svg')", "url('/img/purple.svg')",];
+    var change = document.querySelector(".container");
+    var title = document.querySelector("#title");
+    var randomNumber = Math.floor(Math.random() * 5);
+    change.style.backgroundImage = arrayBackgrounds[randomNumber];
+    change.style.backgroundRepeat = "no-repeat";
+    change.style.backgroundSize = "cover";
+    change.style.backgroundPositionX = "center";
+    change.style.backgroundPositionY = "center";
+    change.style.backgroundOrigin = "border-box";
+    title.style.color = "white";
 };
 var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, function () {
     var respuesta, data, caja, d, text;
@@ -112,7 +128,7 @@ boton === null || boton === void 0 ? void 0 : boton.addEventListener('click', fu
 var opinion = document.getElementById("opinion");
 var addBotons = function () {
     opinion.innerHTML = "";
-    opinion.insertAdjacentHTML('beforeend', "\n  <button id=\"positive\">\uD83D\uDE01</button>\n  <button id=\"neutral\">\uD83D\uDE10</button>\n  <button id=\"negative\">\uD83D\uDE2A</button>");
+    opinion.insertAdjacentHTML('beforeend', "\n  <button class=\"faces\">\uD83D\uDE01</button>\n  <button class=\"faces\">\uD83D\uDE10</button>\n  <button class=\"faces\">\uD83D\uDE2A</button>");
 };
 var rank;
 var rating = function () {
