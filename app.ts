@@ -1,5 +1,17 @@
 let reportAcudits: any[] = [];
 
+const getAPITemperature:any =async()=>{
+  const respuesta = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Barcelona&APPID=36186b9d10d0073dd0551fb3d0367789');
+  const temperatura = await respuesta.json();
+    console.log(temperatura);
+    console.log(temperatura.weather[0].main);
+
+    let temp: any = document.getElementById("temperature");
+    temp.textContent=temperatura.weather[0].main;
+}
+getAPITemperature();
+
+
 const requestApiJoke:any = async ()=>{
 
     const respuesta = await fetch('https://icanhazdadjoke.com/slack');
@@ -23,8 +35,7 @@ boton?.addEventListener('click',()=> {requestApiJoke();
                                       addBotons();
                                       rating();
                                       boton.textContent="Next joke!";
-                                      rank = 0;
-                                    });
+                                      });
 
 let opinion:any = document.getElementById("opinion");
 

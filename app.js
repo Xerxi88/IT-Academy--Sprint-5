@@ -36,6 +36,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var reportAcudits = [];
+var getAPITemperature = function () { return __awaiter(_this, void 0, void 0, function () {
+    var respuesta, temperatura, temp;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, fetch('https://api.openweathermap.org/data/2.5/weather?q=Barcelona&APPID=36186b9d10d0073dd0551fb3d0367789')];
+            case 1:
+                respuesta = _a.sent();
+                return [4 /*yield*/, respuesta.json()];
+            case 2:
+                temperatura = _a.sent();
+                console.log(temperatura);
+                console.log(temperatura.weather[0].main);
+                temp = document.getElementById("temperature");
+                temp.textContent = temperatura.weather[0].main;
+                return [2 /*return*/];
+        }
+    });
+}); };
+getAPITemperature();
 var requestApiJoke = function () { return __awaiter(_this, void 0, void 0, function () {
     var respuesta, data, caja, d, text;
     return __generator(this, function (_a) {
@@ -64,7 +83,6 @@ boton === null || boton === void 0 ? void 0 : boton.addEventListener('click', fu
     addBotons();
     rating();
     boton.textContent = "Next joke!";
-    rank = 0;
 });
 var opinion = document.getElementById("opinion");
 var addBotons = function () {
